@@ -3,6 +3,7 @@ import { getArticleById } from '../../../../../api';
 import { LoadingBar } from "../../../index";
 import { useParams } from "react-router-dom";
 import SingleArticle from "./SingleArticle";
+import CommentsList from "./CommentsList";
 
 function ArticleDetail() {
     const [article, setArticle] = useState(null);
@@ -35,6 +36,7 @@ function ArticleDetail() {
                     showArticle && <div>No articles found.</div>
                 )}
             </div>
+            <CommentsList article_id={article_id}/>
         </div>
     );
 }

@@ -8,7 +8,6 @@ function SingleArticle({ article }) {
             <p>{article.body}</p>
             <p>Posted By {article.author}</p>
             <p>Ratings ({article.votes})</p>
-            <p>Comments ({article.comment_count})</p>
         </div>
     );
 }
