@@ -1,4 +1,5 @@
 #root {
-  max-width: 1280px;
+  max-width: auto;
   text-align: center;
+  padding: 1rem 1;
 }

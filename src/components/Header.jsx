@@ -1,9 +1,14 @@
-function Header({header}) {
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+function UserHeader() {
     return (
-        <div>
-            <h1>{header}</h1>
-        </div>
-    )
+        <h1>
+            <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+                NC NEWS
+            </Link>
+        </h1>
+    );
 }
 
-export default Header;
+export default UserHeader;

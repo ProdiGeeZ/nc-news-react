@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { endpoints } from '../../../../../endpoints'
+import { endpoints } from '../../../../endpoints'
 import ArticlesRender from "./ArticlesRender";
 
 function Articles() {
