@@ -6,8 +6,8 @@ function NavBar() {
     <nav>
             <ul style={{ listStyle: 'none', display: 'flex', justifyContent: "space-around", margin: 0}}>
             <li><Link id="allArticles" to='/Articles'>Articles</Link></li>
-            <li><Link id="allArticles" to='/Topics'>Topics</Link></li>
-            <li><Link id="allArticles" to='/Users'>Users</Link></li>    
+            <li><Link id="allTopics" to='/Topics'>Topics</Link></li>
+            <li><Link id="allAUsers" to='/Users'>Users</Link></li>    
         </ul>
         <SearchBar />
     </nav>
