@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { getArticleComments } from '../../../../../api';
 import { useEffect, useState } from 'react';
 
@@ -16,11 +17,11 @@ function CommentsList({ article_id }) {
             <h2>Comments ({comments.length})</h2>
             {comments.map((comment) => (
                 <div key={comment.comment_id}>
-                    <h6>{comment.author}</h6>
+                    <h4>{comment.author}</h4>
+                    <p>{moment(comment.created_at).startOf('day').fromNow()}</p>
                     <p>{comment.body}</p>
-                    <p>{comment.votes}</p>
-                    <p>{new Date(comment.created_at).toLocaleDateString()}</p>
                     <p style={{display: "none"}}>Posted on Article {comment.article_id}</p>
+                    <p>Karma ({comment.votes})</p>
                 </div>
             ))}
         </div>
