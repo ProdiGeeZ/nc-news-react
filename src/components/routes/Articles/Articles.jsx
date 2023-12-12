@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { endpoints } from '../../../../endpoints';
+import { getAllArticles } from '../../../../api';
 import ArticlesRender from "./ArticlesRender";
 import LoadingBar from "../../base/LoadingBar";
 
@@ -10,22 +10,17 @@ function Articles() {
 
     useEffect(() => {
         setLoadProgress(15);
-        const queryString = endpoints.articles;
-        fetch(queryString)
-            .then((response) => {
-                setLoadProgress(50);
-                return response.json();
-            })
-            .then((body) => {
-                setArticles(body.articles);
-                setLoadProgress(100);
-                setTimeout(() => {
-                    setLoadProgress(0);
+        getAllArticles()
+            .then((data) => {
+                if (data) {
+                    setArticles(data.articles);
+                    setLoadProgress(100);
                     setTimeout(() => {
+                        setLoadProgress(0);
                         setShowArticles(true);
-                    }, 500); 
-                }, 1250); 
-            });
+                    }, 1000);
+                }
+            })
     }, []);
 
     return (
