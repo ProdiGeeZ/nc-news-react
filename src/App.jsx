@@ -1,19 +1,14 @@
 import './App.css'
 import { Routes, Route } from 'react-router-dom';
 import { Header, NavBar, UserHeader, Footer } from './components/index';
-import Home from './components/routes/Home/Home';
-import Articles from './components/routes/Articles/Articles';
-import ArticleDetail from './components/routes/Articles/ArticleDetail';
-import Topics from './components/routes/Topics/Topics';
-import Users from './components/routes/Users/Users';
-
+import { Home, Articles, ArticleDetail, Topics, Users } from './components/routes/index';
 
 function App() {
   return (
     <>
-      <Header header={'NC News Friends.'}/>
+      <Header/>
       <UserHeader name={'Stuart'}/>
-      <NavBar />
+      <NavBar/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/articles" element={<Articles />} />

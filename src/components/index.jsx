@@ -1,6 +1,5 @@
-// components/index.js
-export { default as Header } from './Header';
-export { default as Footer } from './Footer';
-export { default as NavBar } from './NavBar';
-export { default as SearchBar } from './SearchBar';
-export { default as UserHeader } from './UserHeader';
+export { default as Header } from './base/Header';
+export { default as Footer } from './base/Footer';
+export { default as NavBar } from './base/NavBar';
+export { default as SearchBar } from './base/SearchBar';
+export { default as UserHeader } from './base/UserHeader';

@@ -1,4 +1,4 @@
-function ArticleDetail() {
+function ArticleDetail({article_id}) {
     return (
         <>
             <h1>This is empty article.</h1>
