@@ -10,7 +10,7 @@ function ArticleVotes({ initialVoteCount }) {
         setVoteCount(voteCount + voteChange);
         patchArticleVote(article_id, voteChange)
             .then(data => {
-                console.log("Vote updated:", data);
+                console.log(`Vote updated for Article ${article_id}:`, data);
             })
     };
 

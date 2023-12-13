@@ -1,7 +1,7 @@
 function Topics() {
     return (
         <>
-            <h1>This is Topics.</h1>
+            <h1 className="navigation">This is Topics.</h1>
         </>
     )
 }

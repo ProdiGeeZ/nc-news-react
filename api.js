@@ -42,7 +42,7 @@ export const patchArticleVote = (articleId, voteChange) => {
 
     return axios
         .patch(url, data)
-        .then(response => response.data)
+        .then(response => response.data.article.votes)
         .catch((error) => {
             console.error(`Error patching vote for article ${articleId}:`, error);
             throw error; 

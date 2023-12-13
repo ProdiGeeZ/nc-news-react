@@ -1,6 +1,6 @@
 function Footer({footerText}) {
     return (
-        <div>
+        <div className="navigation">
             <h4>{footerText}</h4>
         </div>
     )

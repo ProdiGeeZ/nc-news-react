@@ -21,7 +21,7 @@ function ArticleDetail() {
                     setTimeout(() => {
                         setLoadProgress(0);
                         setShowArticle(true);
-                    }, 1000); 
+                    }, 500); 
                 }
             })
     }, [article_id]);
