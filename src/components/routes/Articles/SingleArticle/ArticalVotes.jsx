@@ -14,7 +14,7 @@ function ArticleVotes({ initialVoteCount }) {
             })
             .catch((error) => {
                 console.log(`Error adding vote for Article ${article_id}`, error);
-                setVoteCount(initialVoteCount); 
+                setVoteCount(voteCount); 
             });
     };
 
