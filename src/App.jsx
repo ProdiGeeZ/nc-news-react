@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <Header/>
-      <UserHeader name={'Stuart'}/>
+      <UserHeader username={'icellusedkars'}/>
       <NavBar/>
         <Routes>
           <Route path="/" element={<Home />} />
