@@ -68,3 +68,15 @@ export const postComment = (articleId, username, bodyMsg) => {
             throw error; 
         });
 }
+
+export const deleteComments = (commentId) => {
+    const url = endpoints.deleteComments(commentId)
+    return axios
+        .delete(url)
+        .then((response) => {
+            return response
+        })
+        .catch((error) => {
+            console.error(`Error deleting comment ${commentId}`, error);
+        });
+} 
