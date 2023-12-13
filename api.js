@@ -69,8 +69,8 @@ export const postComment = (articleId, username, bodyMsg) => {
         });
 }
 
-export const deleteComments = (commentId) => {
-    const url = endpoints.deleteComments(commentId)
+export const deleteCommentById = (commentId) => {
+    const url = endpoints.deleteComment(commentId)
     return axios
         .delete(url)
         .then((response) => {
