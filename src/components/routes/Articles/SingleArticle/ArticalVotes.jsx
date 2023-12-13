@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { patchArticleVote } from '../../../../../api'; 
+import { patchArticleVote } from '../../../../../api';
 
 function ArticleVotes({ initialVoteCount }) {
     const [voteCount, setVoteCount] = useState(initialVoteCount);
@@ -12,6 +12,10 @@ function ArticleVotes({ initialVoteCount }) {
             .then(data => {
                 console.log(`Vote updated for Article ${article_id}:`, data);
             })
+            .catch((error) => {
+                console.log(`Error adding vote for Article ${article_id}`, error);
+                setVoteCount(initialVoteCount); 
+            });
     };
 
     return (
