@@ -15,38 +15,6 @@
         0 1px rgba(255, 255, 255, 0.08);
 }
 
-.progress-bar {
-    height: 18px;
-    background-color: #ee303c;
-    border-radius: 4px;
-    transition: 0.4s linear;
-    transition-property: width, background-color;
-}
-
-.progress-striped .progress-bar {
-    background-color: #3c6e71;
-    width: 100%;
-    background-image: linear-gradient(45deg,
-            #353535 25%,
-            transparent 25%,
-            transparent 50%,
-            #353535 50%,
-            #353535 75%,
-            transparent 75%,
-            transparent);
-    animation: progressAnimationStrike 2s;
-}
-
-@keyframes progressAnimationStrike {
-    from {
-        width: 0;
-    }
-
-    to {
-        width: 100%;
-    }
-}
-
 .progress2 {
     padding: 6px;
     border-radius: 30px;
@@ -74,90 +42,12 @@
 @keyframes progressAnimation {
     0% {
         width: 0%;
-        background-color: #f9bcca;
+        background-color: #26cc20;
     }
 
     100% {
         width: 85%;
-        background-color: #ef476f;
-    }
-}
-
-.progress-bar3 {
-    height: 18px;
-    border-radius: 4px;
-    background-image: linear-gradient(to right,
-            #355070,
-            #6d597a,
-            #b56576,
-            #e56b6f,
-            #eaac8b,
-            #ff2d55);
-    transition: 0.5s linear;
-    transition-property: width, background-color;
-}
-
-.progress-infinite .progress-bar3 {
-    width: 100%;
-    background-image: linear-gradient(to right,
-            #355070,
-            #6d597a,
-            #b56576,
-            #e56b6f,
-            #eaac8b,
-            #ff2d55);
-    animation: colorAnimation 0.5s infinite;
-}
-
-@keyframes colorAnimation {
-    0% {
-        background-image: linear-gradient(to right,
-                #355070,
-                #6d597a,
-                #b56576,
-                #e56b6f,
-                #eaac8b,
-                #ff2d55);
-    }
-
-    20% {
-        background-image: linear-gradient(to right,
-                #6d597a,
-                #b56576,
-                #e56b6f,
-                #eaac8b,
-                #ff2d55,
-                #355070);
-    }
-
-    40% {
-        background-image: linear-gradient(to right,
-                #b56576,
-                #e56b6f,
-                #eaac8b,
-                #ff2d55,
-                #355070,
-                #6d597a);
-    }
-
-    60% {
-        background-image: linear-gradient(to right,
-                #e56b6f,
-                #eaac8b,
-                #ff2d55,
-                #355070,
-                #6d597a,
-                #b56576);
-    }
-
-    100% {
-        background-image: linear-gradient(to right,
-                #eaac8b,
-                #ff2d55,
-                #355070,
-                #6d597a,
-                #b56576,
-                #e56b6f);
+        background-color: #156d12;
     }
 }
 

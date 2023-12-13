@@ -33,3 +33,18 @@ export const getArticleComments = (articleId) => {
         });
 }
 
+export const patchArticleVote = (articleId, voteChange) => {
+    const url = endpoints.updateArticleVotes(articleId);
+
+    const data = {
+        inc_votes: voteChange 
+    };
+
+    return axios
+        .patch(url, data)
+        .then(response => response.data.article.votes)
+        .catch((error) => {
+            console.error(`Error patching vote for article ${articleId}:`, error);
+            throw error; 
+        });
+};

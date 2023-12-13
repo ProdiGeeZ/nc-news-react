@@ -18,7 +18,7 @@ function Articles() {
                     setTimeout(() => {
                         setLoadProgress(0);
                         setShowArticles(true);
-                    }, 1000);
+                    }, 500);
                 }
             })
     }, []);

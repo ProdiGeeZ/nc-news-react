@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function UserHeader() {
     return (
-        <h1>
+        <h1 className='header-icon'>
             <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
                 NC NEWS
             </Link>
