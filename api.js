@@ -53,13 +53,15 @@ export const postComment = (articleId, username, bodyMsg) => {
     const url = endpoints.postComment(articleId)
 
     const commentData = {
-        username: UserHeader.username, body: bodyMsg
+        username: username,
+        body: bodyMsg,
+        article_id: articleId,
     }
 
     return axios
         .post(url, commentData)
         .then((response) => {
-            response.data.comment
+            return response
         })
         .catch((error) => {
             console.error(`Error posting comment for article ${articleId}:`, error);

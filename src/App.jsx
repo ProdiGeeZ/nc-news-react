@@ -1,4 +1,5 @@
 import '../stylesheets/App.css'
+import './momentConfig'
 import { Routes, Route } from 'react-router-dom';
 import { Header, NavBar, UserHeader, Footer } from './components/index';
 import { Home, Articles, ArticleDetail, Topics, Users } from './components/routes/routeIndex';
@@ -7,7 +8,7 @@ function App() {
   return (
     <>
       <Header/>
-      <UserHeader username={'icellusedkars'}/>
+      <UserHeader username={'weegembump'}/>
       <NavBar/>
         <Routes>
           <Route path="/" element={<Home />} />
