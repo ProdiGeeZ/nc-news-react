@@ -49,7 +49,7 @@ export const patchArticleVote = (articleId, voteChange) => {
         });
 };
 
-export const postComment = (articleId, bodyMsg) => {
+export const postComment = (articleId, username, bodyMsg) => {
     const url = endpoints.postComment(articleId)
 
     const commentData = {

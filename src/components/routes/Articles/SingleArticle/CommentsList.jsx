@@ -1,21 +1,31 @@
 import moment from 'moment';
 import { getArticleComments } from '../../../../../api';
 import { useEffect, useState } from 'react';
+import PostComment from './PostComment';
 
 function CommentsList({ article_id }) {
     const [comments, setComments] = useState([]);
 
     useEffect(() => {
+        loadComments();
+    }, []);
+
+    const loadComments = () => {
         getArticleComments(article_id)
             .then((data) => {
                 setComments(data.comments);
-            })
-    }, []);
+            });
+    };
+
+    const addComment = (newComment) => {
+        setComments(prevComments => [newComment, ...prevComments]);
+    };
 
     return (
         <div className='comments-container'>
             <div className="comments-section">
                 <h2>Comments ({comments?.length ?? 0})</h2>
+                <PostComment article_id={article_id} onCommentPost={addComment} />
                 {comments?.length > 0 ? (
                     comments.map((comment) => (
                         <div className="comment" key={comment.comment_id}>
@@ -27,7 +37,9 @@ function CommentsList({ article_id }) {
                         </div>
                     ))
                 ) : (
+                    <>
                     <p>Oh so empty...</p>
+                    </>
                 )}
             </div>
         </div>
