@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import moment from "moment";
+import QueryHeader from "../../base/QueryHeader";
 
 function ArticlesRender({ articles }) {
     return (
+        <div className="articles-container">
+            <QueryHeader/>
         <div className="articles-list">
             {articles.map(article => (
                 <div className="article-card" key={article.article_id}>
@@ -11,7 +14,9 @@ function ArticlesRender({ articles }) {
                     )}
                     <div className="article-content">
                         <Link to={`/articles/${article.article_id}`} className="article-link"><h3>{article.title}</h3></Link>
+                        <Link to={`/articles?topic=${article.topic}`} className="topic-link">
                         <p className="article-topic">Published in <span className="topic-span">{article.topic}</span></p>
+                        </Link>
                         <p className="article-date">Posted on {moment(article.created_at).format('Do MMM YY')}</p>
                         <p className="article-author">by {article.author}</p>
                         <p className="article-votes">Ratings ({article.votes})</p>
@@ -19,6 +24,7 @@ function ArticlesRender({ articles }) {
                     </div>
                 </div>
             ))}
+            </div>
         </div>
     );
 }
