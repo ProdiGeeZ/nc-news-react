@@ -26,6 +26,7 @@ function PostComment({ onPostComment }) {
         setComment('');
         setIsActive(false);
     };
+    
     return (
         <div className="add-comment">
             <form onSubmit={commentData} className="comment-form">

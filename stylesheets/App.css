@@ -320,6 +320,18 @@
   text-align: center;
 }
 
+.success-message {
+  text-align: center; 
+  color: #28a745; 
+  background-color: #dff0d8; 
+  border-color: #d4edda;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: opacity ease-in-out;
+}
+
 @media (max-width: 600px) {
   .comments-section {
     padding: 1rem;
