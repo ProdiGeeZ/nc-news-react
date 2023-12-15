@@ -3,16 +3,16 @@ import { useParams } from "react-router-dom";
 import { postComment } from "../../../../../api";
 import { useUser } from "../../../../UserContext";
 
-
 function PostComment({ onPostComment }) {
     const [comment, setComment] = useState('');
     const [isActive, setIsActive] = useState(false);
     const { article_id } = useParams();
     const { User } = useUser();
-
+  
     const commentData = (event) => {
         event.preventDefault();
         if (comment.trim()) {
+
             postComment(article_id, User.username, comment)
                 .then((response) => {
                     setComment('');
@@ -21,6 +21,17 @@ function PostComment({ onPostComment }) {
                 })
                 .catch((error) => {
                     console.error(`Failed to post comment to Article ${article_id}`, error);
+
+            postComment(article_id, 'weegembump', comment)
+                .then((response) => {
+                    setComment('');
+                    setIsActive(false);
+                    onPostComment(response.data.comment, true);
+                })
+                .catch((error) => {
+                    console.error(`Failed to post comment to Article ${article_id}`, error);
+                    onPostComment(null, false); 
+                    setComment('');
                 });
         }
     };
@@ -29,6 +40,7 @@ function PostComment({ onPostComment }) {
         setComment('');
         setIsActive(false);
     };
+
     return (
         <div className="add-comment">
             <form onSubmit={commentData} className="comment-form">
@@ -49,6 +61,7 @@ function PostComment({ onPostComment }) {
                     <div className="button-container" style={{ display: 'flex' }}>
                         <button type="button" className="comment-cancel" onClick={handleCancel}>Cancel</button>
                         <button type="submit" className="comment-submit"  disabled={!comment.trim()}>Comment</button>
+                        <button type="submit" className="comment-submit" disabled={!comment.trim()}>Comment</button>
                     </div>
                 )}
             </form>
