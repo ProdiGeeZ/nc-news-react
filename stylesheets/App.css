@@ -332,6 +332,19 @@
   transition: opacity ease-in-out;
 }
 
+.failure-message {
+  text-align: center; 
+  color: #dc3545; 
+  background-color: #f8d7da; 
+  border-color: #f5c6cb; 
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: opacity ease-in-out;
+}
+
+
 @media (max-width: 600px) {
   .comments-section {
     padding: 1rem;

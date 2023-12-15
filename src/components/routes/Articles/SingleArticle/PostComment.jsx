@@ -14,10 +14,12 @@ function PostComment({ onPostComment }) {
                 .then((response) => {
                     setComment('');
                     setIsActive(false);
-                    onPostComment(response.data.comment);
+                    onPostComment(response.data.comment, true);
                 })
                 .catch((error) => {
                     console.error(`Failed to post comment to Article ${article_id}`, error);
+                    onPostComment(null, false); 
+                    setComment('');
                 });
         }
     };
@@ -26,7 +28,7 @@ function PostComment({ onPostComment }) {
         setComment('');
         setIsActive(false);
     };
-    
+
     return (
         <div className="add-comment">
             <form onSubmit={commentData} className="comment-form">
@@ -46,7 +48,7 @@ function PostComment({ onPostComment }) {
                 {isActive && (
                     <div className="button-container" style={{ display: 'flex' }}>
                         <button type="button" className="comment-cancel" onClick={handleCancel}>Cancel</button>
-                        <button type="submit" className="comment-submit"  disabled={!comment.trim()}>Comment</button>
+                        <button type="submit" className="comment-submit" disabled={!comment.trim()}>Comment</button>
                     </div>
                 )}
             </form>

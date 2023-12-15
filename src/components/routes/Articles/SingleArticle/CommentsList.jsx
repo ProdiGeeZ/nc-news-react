@@ -2,45 +2,42 @@ import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import { getArticleComments } from '../../../../../api';
 import PostComment from './PostComment';
-import LoadingBar from '../../../base/LoadingBar';
+import { SpinnerLoader } from '../../../base/SpinnerLoader';
 
 function CommentsList({ article_id }) {
     const [comments, setComments] = useState([]);
-    const [loadProgress, setLoadProgress] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-    const [messageOpacity, setMessageOpacity] = useState(0);
+    const [showFailureMessage, setShowFailureMessage] = useState(false);
 
     const loadComments = () => {
         setIsLoading(true);
-        setLoadProgress(45); 
 
         getArticleComments(article_id)
             .then((data) => {
                 setComments(data.comments);
-                setLoadProgress(100); 
             })
             .finally(() => {
-                setTimeout(() => {
-                    setIsLoading(false);
-                }, 1000);
-                
+                setIsLoading(false);
             });
     };
 
-    const handlePostComment = () => {
-        setMessageOpacity(1)
-        loadComments();
-        setShowSuccessMessage(true);
-        setTimeout(() => {
-            setMessageOpacity(0); 
-        }, 1000);
-
-        setTimeout(() => {
-            setShowSuccessMessage(false); 
-        }, 1000); 
-    
+    const handlePostComment = (newComment, isSuccess) => {
+        if (isSuccess) {
+            setShowSuccessMessage(true);
+            setComments(prevComments => [newComment, ...prevComments]);
+            setTimeout(() => {
+                setShowSuccessMessage(false);
+            }, 2000);
+        } else {
+            setShowFailureMessage(true);
+            
+            setTimeout(() => {
+                setShowFailureMessage(false);
+            }, 4000);
+        }
     };
+
 
     useEffect(() => {
         loadComments();
@@ -48,12 +45,17 @@ function CommentsList({ article_id }) {
 
     return (
         <div className='comments-container'>
-            {isLoading && <LoadingBar progress={loadProgress} />}
             {showSuccessMessage && <p className="success-message">Comment posted successfully!</p>}
+            {showFailureMessage && <p className="failure-message">Failed to post comment. Please try again later.</p>}
 
             <div className="comments-section">
                 <h2>Comments ({comments?.length ?? 0})</h2>
-                <PostComment article_id={article_id} onPostComment={handlePostComment} />
+                {isLoading ? (
+                    <SpinnerLoader />
+                ) : (
+                    <PostComment article_id={article_id} onPostComment={handlePostComment} />
+                )}
+
                 {comments?.length > 0 ? (
                     comments.map((comment) => (
                         <div className="comment" key={comment.comment_id}>
@@ -65,11 +67,12 @@ function CommentsList({ article_id }) {
                         </div>
                     ))
                 ) : (
-                    <p>Oh so empty...</p>
+                    !isLoading && <p>No comments yet. Be the first to comment!</p>
                 )}
             </div>
         </div>
     );
+
 }
 
 export default CommentsList;
