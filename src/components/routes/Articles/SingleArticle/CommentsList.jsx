@@ -38,7 +38,6 @@ function CommentsList({ article_id }) {
         }
     };
 
-
     useEffect(() => {
         loadComments();
     }, [article_id]);
