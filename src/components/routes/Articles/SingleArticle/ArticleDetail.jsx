@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getArticleById } from '../../../../../api'; 
+import { getArticleById } from '../../../../../api';
 import { LoadingBar } from "../../../index";
 import { useParams } from "react-router-dom";
 import SingleArticle from "./SingleArticle";
@@ -21,7 +21,7 @@ function ArticleDetail() {
                     setTimeout(() => {
                         setLoadProgress(0);
                         setShowArticle(true);
-                    }, 500); 
+                    }, 500);
                 }
             })
     }, [article_id]);
@@ -36,7 +36,7 @@ function ArticleDetail() {
                     showArticle && <div>No articles found.</div>
                 )}
             </div>
-            <CommentsList article_id={article_id}/>
+            <CommentsList article_id={article_id} />
         </div>
     );
 }

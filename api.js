@@ -48,3 +48,23 @@ export const patchArticleVote = (articleId, voteChange) => {
             throw error; 
         });
 };
+
+export const postComment = (articleId, username, bodyMsg) => {
+    const url = endpoints.postComment(articleId)
+
+    const commentData = {
+        username: username,
+        body: bodyMsg,
+        article_id: articleId,
+    }
+
+    return axios
+        .post(url, commentData)
+        .then((response) => {
+            return response
+        })
+        .catch((error) => {
+            console.error(`Error posting comment for article ${articleId}:`, error);
+            throw error; 
+        });
+}
