@@ -21,6 +21,11 @@ function CommentsList({ article_id }) {
         loadComments();
     }, [article_id]);
 
+    const handleDeleteComment = (commentId) => {
+        setComments(comments.filter(comment => comment.comment_id !== commentId));
+    };
+    
+
     return (
         <div className='comments-container'>
             <div className="comments-section">
@@ -37,7 +42,7 @@ function CommentsList({ article_id }) {
                             <div className="comment-footer">
                                 <p className="comment-karma">Karma ({comment.votes})</p>
                                 {comment.author === currentUsername && (
-                                    <DeleteButton comment_id={comment.comment_id} onDeleteComment={loadComments} />
+                                    <DeleteButton comment_id={comment.comment_id} onDeleteComment={handleDeleteComment} />
                                 )}
                             </div>
                         </div>
