@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { postComment } from "../../../../../api";
 import { useUser } from "../../../../UserContext";
 
-
 function PostComment({ onPostComment }) {
     const [comment, setComment] = useState('');
     const [isActive, setIsActive] = useState(false);
@@ -17,18 +16,22 @@ function PostComment({ onPostComment }) {
                 .then((response) => {
                     setComment('');
                     setIsActive(false);
-                    onPostComment(response.data.comment);
+                    onPostComment(response.data.comment, true);
                 })
                 .catch((error) => {
                     console.error(`Failed to post comment to Article ${article_id}`, error);
+                    handleCancel()
+                    onPostComment(null, false);
                 });
         }
     };
+
 
     const handleCancel = () => {
         setComment('');
         setIsActive(false);
     };
+
     return (
         <div className="add-comment">
             <form onSubmit={commentData} className="comment-form">
@@ -48,7 +51,7 @@ function PostComment({ onPostComment }) {
                 {isActive && (
                     <div className="button-container" style={{ display: 'flex' }}>
                         <button type="button" className="comment-cancel" onClick={handleCancel}>Cancel</button>
-                        <button type="submit" className="comment-submit"  disabled={!comment.trim()}>Comment</button>
+                        <button type="submit" className="comment-submit" disabled={!comment.trim()}>Comment</button>
                     </div>
                 )}
             </form>

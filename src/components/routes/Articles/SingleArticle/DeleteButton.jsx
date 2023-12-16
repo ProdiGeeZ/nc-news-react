@@ -5,10 +5,17 @@ function DeleteButton({ comment_id, onDeleteComment }) {
     const deleteComment = () => {
         deleteCommentById(comment_id)
             .then((response) => {
-                console.log(`Comment Deleted`, response);
-                onDeleteComment(comment_id)
+                if (response.status === 204) {
+                    console.log(response);
+                    console.log(`Comment Deleted`, response);
+                    onDeleteComment(comment_id, true); 
+                } else {
+                    console.error(`Failed to delete comment ${comment_id}: ${response}`);
+                    onDeleteComment(comment_id, false); 
+                }
             }).catch((error) => {
-                console.log(`Error deleting comment ${comment_id}`, error);
+                console.error(`Error deleting comment ${comment_id}`, error);
+                onDeleteComment(comment_id, false); 
             });
     }
 
