@@ -20,6 +20,7 @@ function PostComment({ onPostComment }) {
                 })
                 .catch((error) => {
                     console.error(`Failed to post comment to Article ${article_id}`, error);
+                    handleCancel()
                     onPostComment(null, false);
                 });
         }

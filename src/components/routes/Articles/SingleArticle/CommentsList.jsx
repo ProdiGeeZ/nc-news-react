@@ -40,7 +40,7 @@ function CommentsList({ article_id }) {
             }, 2000);
         } else {
             setShowFailureMessage(true);
-
+            
             setTimeout(() => {
                 setShowFailureMessage(false);
             }, 4000);
