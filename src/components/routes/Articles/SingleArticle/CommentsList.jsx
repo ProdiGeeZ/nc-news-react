@@ -18,7 +18,6 @@ function CommentsList({ article_id }) {
 
     const loadComments = () => {
         setIsLoading(true);
-
         getArticleComments(article_id)
             .then((data) => {
                 setComments(data.comments);
@@ -27,6 +26,10 @@ function CommentsList({ article_id }) {
                 setIsLoading(false);
             });
     };
+
+    useEffect(() => {
+        loadComments();
+    }, [article_id]);
 
     const handlePostComment = (newComment, isSuccess) => {
         if (isSuccess) {
@@ -37,30 +40,24 @@ function CommentsList({ article_id }) {
             }, 2000);
         } else {
             setShowFailureMessage(true);
-            
             setTimeout(() => {
                 setShowFailureMessage(false);
             }, 4000);
         }
     };
 
-    useEffect(() => {
-        loadComments();
-    }, [article_id]);
-
-    const handleDeleteComment = (commentId, status) => {
-        if (status === false){
-            setShowDeleteFailure(true);
-            
-            setTimeout(() => {
-                setShowDeleteFailure(false);
-            }, 4000);
-        } else {
+    const handleDeleteComment = (commentId, isSuccess) => {
+        if (isSuccess) {
             setShowDeleteSuccess(true);
-        setComments(comments.filter(comment => comment.comment_id !== commentId));
+            setComments(comments.filter(comment => comment.comment_id !== commentId));
             setTimeout(() => {
                 setShowDeleteSuccess(false);
             }, 2000);
+        } else {
+            setShowDeleteFailure(true);
+            setTimeout(() => {
+                setShowDeleteFailure(false);
+            }, 4000);
         }
     };
 
@@ -76,26 +73,27 @@ function CommentsList({ article_id }) {
                 {isLoading ? (
                     <SpinnerLoader />
                 ) : (
-                    <PostComment article_id={article_id} onPostComment={handlePostComment} />
+                    <>
+                        <PostComment article_id={article_id} onPostComment={handlePostComment} />
+                        {comments?.length > 0 ? (
+                            comments.map((comment) => (
+                                <div className="comment" key={comment.comment_id}>
+                                    <div className="comment-header">
+                                        <h4 className="comment-author">{comment.author}</h4>
+                                        <p className="comment-meta">{moment(comment.created_at).fromNow()}</p>
+                                    </div>
+                                    <p className="comment-body">{comment.body}</p>
+                                    <div className="comment-footer">
+                                        <p className="comment-karma">Karma ({comment.votes})</p>
+                                        {comment.author === currentUsername && (
+                                            <DeleteButton comment_id={comment.comment_id} onDeleteComment={handleDeleteComment} />
+                                        )}
+                                    </div>
+                                </div>
+                            ))
+                        ) : (!isLoading && <p>No comments yet. Be the first to comment!</p>)}
+                    </>
                 )}
-
-                {comments?.length > 0 ? (
-                    comments.map((comment) => (
-                        <div className="comment" key={comment.comment_id}>
-                            <div className="comment-header">
-                                <h4 className="comment-author">{comment.author}</h4>
-                                <p className="comment-meta">{moment(comment.created_at).fromNow()}</p>
-                            </div>
-                            <p className="comment-body">{comment.body}</p>
-                            <div className="comment-footer">
-                                <p className="comment-karma">Karma ({comment.votes})</p>
-                                {comment.author === currentUsername && (
-                                    <DeleteButton comment_id={comment.comment_id} onDeleteComment={handleDeleteComment} />
-                                )}
-                            </div>
-                        </div>
-                    ))
-                ) : (!isLoading && <p>No comments yet. Be the first to comment!</p>)}
             </div>
         </div>
     );
