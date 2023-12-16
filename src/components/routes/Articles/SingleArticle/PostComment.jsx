@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { postComment } from "../../../../../api";
+import { useUser } from "../../../../UserContext";
 
 function PostComment({ onPostComment }) {
     const [comment, setComment] = useState('');
     const [isActive, setIsActive] = useState(false);
     const { article_id } = useParams();
+    const { User } = useUser();
 
     const commentData = (event) => {
         event.preventDefault();
         if (comment.trim()) {
-            postComment(article_id, 'weegembump', comment)
+            postComment(article_id, User.username, comment)
                 .then((response) => {
                     setComment('');
                     setIsActive(false);
@@ -18,11 +20,11 @@ function PostComment({ onPostComment }) {
                 })
                 .catch((error) => {
                     console.error(`Failed to post comment to Article ${article_id}`, error);
-                    onPostComment(null, false); 
-                    setComment('');
+                    onPostComment(null, false);
                 });
         }
     };
+
 
     const handleCancel = () => {
         setComment('');
