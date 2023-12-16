@@ -40,6 +40,7 @@ function CommentsList({ article_id }) {
             }, 2000);
         } else {
             setShowFailureMessage(true);
+
             setTimeout(() => {
                 setShowFailureMessage(false);
             }, 4000);
@@ -67,7 +68,6 @@ function CommentsList({ article_id }) {
             {showFailureMessage && <p className="failure-message">Failed to post comment. Please try again later.</p>}
             {showDeleteSuccess && <p className="success-message">Comment deleted successfully!</p>}
             {showDeleteFailure && <p className="failure-message">Failed to delete comment. Please try again later.</p>}
-
             <div className="comments-section">
                 <h2>Comments ({comments?.length ?? 0})</h2>
                 {isLoading ? (

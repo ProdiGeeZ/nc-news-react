@@ -8,21 +8,11 @@ function PostComment({ onPostComment }) {
     const [isActive, setIsActive] = useState(false);
     const { article_id } = useParams();
     const { User } = useUser();
-  
+
     const commentData = (event) => {
         event.preventDefault();
         if (comment.trim()) {
-
             postComment(article_id, User.username, comment)
-                .then((response) => {
-                    setComment('');
-                    setIsActive(false);
-                    onPostComment(response.data.comment);
-                })
-                .catch((error) => {
-                    console.error(`Failed to post comment to Article ${article_id}`, error);
-
-            postComment(article_id, 'weegembump', comment)
                 .then((response) => {
                     setComment('');
                     setIsActive(false);
@@ -30,11 +20,11 @@ function PostComment({ onPostComment }) {
                 })
                 .catch((error) => {
                     console.error(`Failed to post comment to Article ${article_id}`, error);
-                    onPostComment(null, false); 
-                    setComment('');
+                    onPostComment(null, false);
                 });
         }
     };
+
 
     const handleCancel = () => {
         setComment('');
@@ -60,7 +50,6 @@ function PostComment({ onPostComment }) {
                 {isActive && (
                     <div className="button-container" style={{ display: 'flex' }}>
                         <button type="button" className="comment-cancel" onClick={handleCancel}>Cancel</button>
-                        <button type="submit" className="comment-submit"  disabled={!comment.trim()}>Comment</button>
                         <button type="submit" className="comment-submit" disabled={!comment.trim()}>Comment</button>
                     </div>
                 )}
