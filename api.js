@@ -1,16 +1,19 @@
 import axios from 'axios';
 import { endpoints } from './endpoints';
 
-export const getAllArticles = () => {
+export const getAllArticles = (params) => {
+    const queryString = params ? `?${new URLSearchParams(params).toString()}` : '';
     return axios
-        .get(endpoints.articles)
+        .get(`${endpoints.articles}${queryString}`) 
         .then((response) => {
-            return response.data
+            return response.data;
         })
         .catch((error) => {
-            console.error("Error fetching articles:", error)
+            console.error("Error fetching articles with params", params, ":", error);
+            throw error; 
         });
 };
+
 
 export const getArticleById = (articleId) => {
     return axios
@@ -78,5 +81,17 @@ export const deleteCommentById = (commentId) => {
         })
         .catch((error) => {
             console.error(`Error deleting comment ${commentId}`, error);
+        });
+} 
+
+export const getAllTopics = () => {
+    const url = endpoints.topics
+    return axios
+        .get(url)
+        .then((response) => {
+            return response.data.topics
+        })
+        .catch((error) => {
+            console.error(`Error fetching topics`, error);
         });
 }
